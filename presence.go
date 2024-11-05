@@ -113,6 +113,19 @@ func (cli *Client) SubscribePresence(jid types.JID) error {
 	return cli.sendNode(req)
 }
 
+// Değişiklik
+// Bu fonksiyon presence aboneliğini kaldırmak için kullanılır.
+func (cli *Client) UnsubscribePresence(jid types.JID) error {
+	return cli.sendNode(waBinary.Node{
+		Tag: "presence",
+		Attrs: waBinary.Attrs{
+			"type": "unsubscribe",
+			"to":   jid,
+		},
+	})
+}
+
+
 // SendChatPresence updates the user's typing status in a specific chat.
 //
 // The media parameter can be set to indicate the user is recording media (like a voice message) rather than typing a text message.
